@@ -1,0 +1,18 @@
+body {
+    font-family: Inconsolata, monospace;
+    background-color: var(--bg_h);
+    color: var(--fg);
+}
+
+a:link { color: var(--blue); }
+a:visited { color: var(--purple); }
+
+
+#header-links {
+    background-color: var(--bg2);
+    padding: 10px;
+}
+
+h1 {
+    color: var(--blue);
+}
