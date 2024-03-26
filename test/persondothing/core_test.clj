@@ -1,6 +1,6 @@
-(ns web-dev.core-test
+(ns persondothing.core-test
   (:require [clojure.test :refer :all]
-            [web-dev.core :refer :all]))
+            [persondothing.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."

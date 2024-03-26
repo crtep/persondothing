@@ -1,4 +1,4 @@
-(ns web-dev.dbinit
+(ns persondothing.dbinit
   (:require [next.jdbc :as jdbc]))
 
 (def db-spec {:dbtype "h2" :dbname "./my-db"})

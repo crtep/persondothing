@@ -11,7 +11,7 @@
                  [hiccup/hiccup            "1.0.5"]
                  [com.github.seancorfield/next.jdbc "1.3.925"]
                  [com.h2database/h2 "2.1.214"]
-                 [com.taoensso/sente "1.19.2"]
+                 [http-kit "2.7.0"]
                  ]
   :repl-options {:init-ns persondothing.core}
   :main ^:skip-aot persondothing.core

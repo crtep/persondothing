@@ -1,12 +1,24 @@
 (ns persondothing.core
   (:require 
             [persondothing.views :as views] ; add this require
+            [persondothing.clients :refer :all] ; add this require
             [ring.adapter.jetty :as jetty]
             [ring.util.response :refer [redirect]]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-            [taoensso.sente :as sente]
-            [taoensso.sente.server-adapters.http-kit :refer (get-sch-adapter)])
+            [org.httpkit.server :refer :all]
+)
   (:gen-class))
+
+(defn saycat [channel message]
+  (send! channel (views/html-chat-body)))
+
+
+(defn ws-handler [request]
+  (as-channel request
+    {:on-receive #'saycat
+     :on-open (fn [ch] (swap! clients_ conj ch))}
+    ))
+
 
 (defn ok [html]
   {:status 200
@@ -24,6 +36,7 @@
                                                  (redirect "/chat"))
       (and (= uri "/chat") (= method :post)) (let [params (get request :params)]
                                                (ok (views/chat-page params)))
+      (and (= uri "/ws") (= method :get)) (#'ws-handler request)
       :else (views/chat-page))))
 
 
@@ -31,12 +44,13 @@
   (wrap-defaults #'app-routes site-defaults))
 
 (defn -main []
-  (jetty/run-jetty #'app {:port 8000}))
+  (run-server #'app {:port 8000}))
 
 (comment
   ;; evaluate this def form to start the webapp via the REPL:
   ;; :join? false runs the web server in the background!
-  (def server (jetty/run-jetty #'app {:port 8000 :join? false}))
+  (def server (run-server #'app {:port 8000 :join? false}))
   ;; evaluate this form to stop the webapp via the the REPL:
-  (.stop server)
+  (server)
+  
   )

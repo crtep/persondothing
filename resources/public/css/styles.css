@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+
 body {
     font-family: Inconsolata, monospace;
     background-color: var(--bg_h);
@@ -7,6 +9,10 @@ body {
 a:link { color: var(--blue); }
 a:visited { color: var(--purple); }
 
+p, input[type=text] {
+    font-size: 12pt;
+    font-family: Inconsolata, monospace;
+}
 
 #header-links {
     background-color: var(--bg2);
